@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MathTrainerlesson_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MathTrainerLesson" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
         <!--Train View Controller-->
         <scene sceneID="bsj-eW-6Aw">
             <objects>
-                <viewController id="1l7-Gd-6oy" customClass="TrainViewController" customModule="MathTrainerlesson_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1l7-Gd-6oy" customClass="TrainViewController" customModule="MathTrainerLesson" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RzZ-KH-vwp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -283,6 +283,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonsActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RyT-V6-gUd"/>
+                                    <action selector="leftActions:" destination="1l7-Gd-6oy" eventType="touchUpInside" id="gTe-pu-kvl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBy-b8-brW" userLabel="ButtonAdd">
@@ -306,6 +307,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonsActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eKl-14-xSv"/>
+                                    <action selector="rightAction:" destination="1l7-Gd-6oy" eventType="touchUpInside" id="aVB-hU-cbw"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35 + 75 = " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qg4-vk-crz">
@@ -333,6 +335,7 @@
                         <outlet property="answerOneButton" destination="0K2-lk-69o" id="aMX-hY-uAM"/>
                         <outlet property="answerTwoButton" destination="YBy-b8-brW" id="FiD-5d-g1V"/>
                         <outlet property="backButton" destination="BnG-N2-aoA" id="sAN-7D-sBh"/>
+                        <outlet property="questionLabel" destination="qg4-vk-crz" id="g1c-Ao-jbD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AcT-kH-vau" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
