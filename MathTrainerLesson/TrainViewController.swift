@@ -51,14 +51,7 @@ final class TrainViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         configureQuestion()
-        let isRightButton = Bool.random()
-        var randomAnswer: Int
-        repeat {
-            randomAnswer = Int.random(in: (answer - 10)...(answer + 10))
-        } while randomAnswer == answer
-        
-        answerOneButton.setTitle(isRightButton ? String(answer) : String(randomAnswer), for: .normal)
-        answerTwoButton.setTitle(isRightButton ? String(randomAnswer) : String(answer), for: .normal)
+        configureButton()
     }
     
     // MARK: - IBActions
@@ -78,6 +71,30 @@ final class TrainViewController: UIViewController {
             questionLabel.text = question
             
         }
+    
+    func configureButton() {
+        configureButtonStyle(button: backButton)
+        configureButtonStyle(button: answerOneButton, cornerRadius: answerOneButton.frame.width / 2.0)
+        configureButtonStyle(button: answerTwoButton, cornerRadius: answerOneButton.frame.width / 2.0)
+        
+        let isRightButton = Bool.random()
+        var randomAnswer: Int
+        repeat {
+            randomAnswer = Int.random(in: (answer - 10)...(answer + 10))
+        } while randomAnswer == answer
+        
+        answerOneButton.setTitle(isRightButton ? String(answer) : String(randomAnswer), for: .normal)
+        answerTwoButton.setTitle(isRightButton ? String(randomAnswer) : String(answer), for: .normal)
+    }
+    
+    func configureButtonStyle(button: UIButton, cornerRadius: CGFloat = 5) {
+        button.layer.cornerRadius = CGFloat(cornerRadius)
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 3
+    }
+    
     private func check(answer: String, for button: UIButton) {
         let isRightAnswer = Int(answer) == self.answer
         button.backgroundColor = isRightAnswer ? .green : .red
@@ -88,6 +105,8 @@ final class TrainViewController: UIViewController {
         }
         
     }
+    
+    
 
 }
 
