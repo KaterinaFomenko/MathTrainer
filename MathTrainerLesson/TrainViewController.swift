@@ -11,10 +11,14 @@ import UIKit
 
 final class TrainViewController: UIViewController {
     @IBOutlet var backButton: UIButton!
+    @IBOutlet var countLabel: UILabel!
     @IBOutlet var answerOneButton: UIButton!
     @IBOutlet var answerTwoButton: UIButton!
+
     @IBOutlet var questionLabel: UILabel!
     
+    @IBOutlet var viewCountLabel: UIView! // ??
+
     // MARK: - Properties
     var type: MathTypes = .add {
         didSet {
@@ -32,17 +36,27 @@ final class TrainViewController: UIViewController {
                }
     private var firstNumber = 0
     private var secondNumber = 0
+    private var firstNumberMult = 0
+    private var secondNumberMult = 0
+    private var firstNumberDivide = 0
+    private var secondNumberDivide = 0
+    
     private var sign = ""
-    private var count = 0
+    
+    private var count = 0 {
+        didSet {
+            configureLabel()
+        }
+    }
  
     var answer: Int {
         switch type {
         case .add:
             return firstNumber + secondNumber
         case .divide:
-            return firstNumber / secondNumber
+            return firstNumberDivide / secondNumberDivide
         case .multiply:
-            return firstNumber * secondNumber
+            return firstNumberMult * secondNumberMult
         case .subtract:
             return firstNumber - secondNumber
         }
@@ -52,6 +66,7 @@ final class TrainViewController: UIViewController {
     override func viewDidLoad() {
         configureQuestion()
         configureButton()
+        configureLabel()
     }
     
     // MARK: - IBActions
@@ -62,15 +77,39 @@ final class TrainViewController: UIViewController {
     @IBAction func rightAction(_ sender: UIButton) {
         check(answer: sender.titleLabel?.text ?? "", for: sender)
     }
+    
+    @IBAction private func incrementCountButtonTapped(_ sender: UIButton) {
+        count += 1
+    }
+    
+    
     // MARK:- Methods
     private func configureQuestion() {
             firstNumber = Int.random(in: 1...99)
             secondNumber = Int.random(in: 1...99)
+            firstNumberMult = Int.random(in: 1...10)
+            secondNumberMult = Int.random(in: 1...10)
+            secondNumberDivide = Int.random(in: 1...10)
+            let answerDiv = Int.random(in: 1...10)
+            firstNumberDivide = answerDiv * secondNumberDivide
             
-        let question = "\(firstNumber) \(sign) \(secondNumber) ="
-            questionLabel.text = question
-            
+        switch sign {
+        case "×":
+            let question = "\(firstNumberMult) \(sign) \(secondNumberMult) ="
+                questionLabel.text = question
+        case "÷":
+            let question = "\(firstNumberDivide) \(sign) \(secondNumberDivide) ="
+                questionLabel.text = question
+        default:
+            let question = "\(firstNumber) \(sign) \(secondNumber) ="
+                questionLabel.text = question
         }
+    }
+    
+    func configureLabel() {
+        configureLabelStyle(label: countLabel)
+        countLabel.text = "\(count)"
+    }
     
     func configureButton() {
         configureButtonStyle(button: backButton)
@@ -79,8 +118,12 @@ final class TrainViewController: UIViewController {
         
         let isRightButton = Bool.random()
         var randomAnswer: Int
+        var limit = 10
+        if sign == "÷" {
+            limit = 5
+        }
         repeat {
-            randomAnswer = Int.random(in: (answer - 10)...(answer + 10))
+            randomAnswer = Int.random(in: (answer - limit)...(answer + limit))
         } while randomAnswer == answer
         
         answerOneButton.setTitle(isRightButton ? String(answer) : String(randomAnswer), for: .normal)
@@ -88,6 +131,8 @@ final class TrainViewController: UIViewController {
     }
     
     func configureButtonStyle(button: UIButton, cornerRadius: CGFloat = 5) {
+        button.backgroundColor = .systemYellow
+        // Add shadow
         button.layer.cornerRadius = CGFloat(cornerRadius)
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -95,18 +140,47 @@ final class TrainViewController: UIViewController {
         button.layer.shadowRadius = 3
     }
     
+    func configureLabelStyle(label: UILabel) {
+        label.layer.cornerRadius = CGFloat(15)
+        label.layer.masksToBounds = true
+
+        // Add shadow
+        label.layer.shadowColor = UIColor.darkGray.cgColor
+        label.layer.shadowPath = UIBezierPath(roundedRect: label.bounds, cornerRadius: label.layer.cornerRadius).cgPath
+        label.layer.shadowOffset = CGSize(width: 0, height: 2)
+        label.layer.shadowOpacity = 0.6
+        label.layer.shadowRadius = 3
+    }
+    
     private func check(answer: String, for button: UIButton) {
         let isRightAnswer = Int(answer) == self.answer
         button.backgroundColor = isRightAnswer ? .green : .red
         
         if isRightAnswer {
-            count += 1
-            configureQuestion()
+            let isSecondAttend = answerOneButton.backgroundColor == .red || answerTwoButton.backgroundColor == .red
+            count += isSecondAttend ? 0 : 1
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                [weak self] in
+                self?.configureQuestion()
+                self?.configureButton()
+            }
         }
-        
     }
-    
-    
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "unwindSegueToVC":
+            if let vc = segue.destination as? ViewController {
+                switch type {
+                case .add: vc.plusCounter = count
+                case .divide: vc.divCounter = count
+                case .multiply: vc.multCounter = count
+                case .subtract: vc.minusCounter = count
+                }
+            }
+        default:
+            print("There are is no logic for segue by this id")
+        }
+    }
 }
 
