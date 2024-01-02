@@ -14,6 +14,7 @@
 		064DA1EE2AFD6D130076FCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 064DA1ED2AFD6D130076FCC9 /* Assets.xcassets */; };
 		064DA1F12AFD6D130076FCC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064DA1EF2AFD6D130076FCC9 /* LaunchScreen.storyboard */; };
 		064DA1FE2AFF5C5C0076FCC9 /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064DA1FD2AFF5C5C0076FCC9 /* TrainViewController.swift */; };
+		06AB9B6D2B44230B000E229C /* TestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AB9B6C2B44230B000E229C /* TestClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		064DA1F02AFD6D130076FCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		064DA1F22AFD6D130076FCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		064DA1FD2AFF5C5C0076FCC9 /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
+		06AB9B6C2B44230B000E229C /* TestClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				064DA1ED2AFD6D130076FCC9 /* Assets.xcassets */,
 				064DA1EF2AFD6D130076FCC9 /* LaunchScreen.storyboard */,
 				064DA1F22AFD6D130076FCC9 /* Info.plist */,
+				06AB9B6C2B44230B000E229C /* TestClass.swift */,
 			);
 			path = MathTrainerLesson;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				064DA1FE2AFF5C5C0076FCC9 /* TrainViewController.swift in Sources */,
 				064DA1E52AFD6D0F0076FCC9 /* AppDelegate.swift in Sources */,
 				064DA1E72AFD6D0F0076FCC9 /* SceneDelegate.swift in Sources */,
+				06AB9B6D2B44230B000E229C /* TestClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
